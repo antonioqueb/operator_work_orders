@@ -1,0 +1,21 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Crear un grupo para Operadores de Máquina -->
+        <record id="group_machine_operator" model="res.groups">
+            <field name="name">Machine Operator</field>
+            <field name="category_id" ref="base.module_category_manufacturing"/>
+        </record>
+
+        <!-- Permisos específicos para las órdenes de trabajo -->
+        <record id="mrp_work_order_access_operator" model="ir.rule">
+            <field name="name">Operator Work Order Access</field>
+            <field name="model_id" ref="mrp.model_mrp_workorder"/>
+            <field name="groups" eval="[(4, ref('operator_work_orders.group_machine_operator'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+    </data>
+</odoo>

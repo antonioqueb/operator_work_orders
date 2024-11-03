@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <!-- Vista de órdenes de trabajo solo accesible para el grupo Machine Operator -->
+        <record id="view_workorder_tree_operator" model="ir.ui.view">
+            <field name="name">workorder.tree.operator</field>
+            <field name="model">mrp.workorder</field>
+            <field name="arch" type="xml">
+                <tree string="Work Orders">
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="workcenter_id"/>
+                    <field name="production_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_work_orders_operator" model="ir.actions.act_window">
+            <field name="name">Work Orders</field>
+            <field name="res_model">mrp.workorder</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_workorder_tree_operator"/>
+            <field name="context">{'search_default_ready_to_start': 1}</field>
+            <field name="groups_id" eval="[(4, ref('operator_work_orders.group_machine_operator'))]"/>
+        </record>
+    </data>
+</odoo>
