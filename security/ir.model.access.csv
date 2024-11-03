@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_mrp_workorder_operator,Acceso a órdenes de trabajo,mrp.model_mrp_workorder,operator_work_orders.group_machine_operator,1,1,0,0
+access_stock_move_operator,Acceso a movimientos de existencias,stock.model_stock_move,operator_work_orders.group_machine_operator,1,1,0,0
