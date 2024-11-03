@@ -1,6 +1,6 @@
 <odoo>
     <data>
-        <!-- Herencia de la vista de árbol de órdenes de trabajo sin modificaciones -->
+        <!-- Herencia de la vista de árbol de órdenes de trabajo -->
         <record id="view_workorder_tree_operator_inherit" model="ir.ui.view">
             <field name="name">workorder.tree.operator.inherit</field>
             <field name="model">mrp.workorder</field>
@@ -10,49 +10,11 @@
             </field>
         </record>
 
-        <!-- Vista Kanban de órdenes de trabajo -->
-        <record id="view_workorder_kanban_operator" model="ir.ui.view">
-            <field name="name">workorder.kanban.operator</field>
-            <field name="model">mrp.workorder</field>
-            <field name="arch" type="xml">
-                <kanban default_group_by="state">
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div class="oe_kanban_global_click card">
-                                <div class="card-header bg-primary text-white">
-                                    <strong><field name="name"/></strong>
-                                </div>
-                                <div class="card-body">
-                                    <p><strong>Centro:</strong> <field name="workcenter_id"/></p>
-                                    <p><strong>Producción:</strong> <field name="production_id"/></p>
-                                    <p>
-                                        <strong>Estado:</strong>
-                                        <field name="state"/>
-                                    </p>
-                                    <!-- Botones de acción -->
-                                    <div>
-                                        <button name="button_start" type="object" string="Iniciar" class="btn btn-primary btn-sm"
-                                                invisible="state != 'ready'"/>
-                                        <button name="button_pending" type="object" string="Pausa" class="btn btn-warning btn-sm"
-                                                invisible="state != 'progress'"/>
-                                    </div>
-                                    <p>
-                                        <strong>Duración:</strong>
-                                        <field name="duration" widget="mrp_timer" readonly="True"/>
-                                    </p>
-                                </div>
-                            </div>
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
-        </record>
-
         <!-- Acción de ventana -->
         <record id="action_work_orders_operator" model="ir.actions.act_window">
             <field name="name">Órdenes de Trabajo</field>
             <field name="res_model">mrp.workorder</field>
-            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_workorder_tree_operator_inherit"/>
             <field name="context">{'search_default_ready_to_start': 1}</field>
             <field name="domain">[]</field>
