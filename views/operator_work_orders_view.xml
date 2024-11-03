@@ -17,8 +17,7 @@
                             invisible="state != 'ready'"/>
                     <button name="button_pending" type="object" string="Pausa" icon="fa-pause"
                             invisible="state != 'progress'"/>
-                    <button name="action_block" type="object" string="Bloquear" icon="fa-lock"
-                            invisible="state != 'progress'"/>
+                    
                 </tree>
             </field>
         </record>
