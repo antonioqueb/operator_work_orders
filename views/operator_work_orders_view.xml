@@ -14,6 +14,7 @@
             </field>
         </record>
 
+        <!-- Acción de ventana para mostrar las órdenes de trabajo -->
         <record id="action_work_orders_operator" model="ir.actions.act_window">
             <field name="name">Work Orders</field>
             <field name="res_model">mrp.workorder</field>
@@ -22,5 +23,12 @@
             <field name="context">{'search_default_ready_to_start': 1}</field>
             <field name="groups_id" eval="[(4, ref('operator_work_orders.group_machine_operator'))]"/>
         </record>
+
+        <!-- Menú para acceder a las órdenes de trabajo -->
+        <menuitem id="menu_work_orders_operator"
+                  name="Work Orders"
+                  parent="mrp.menu_mrp_root"
+                  action="action_work_orders_operator"
+                  groups="operator_work_orders.group_machine_operator"/>
     </data>
 </odoo>
