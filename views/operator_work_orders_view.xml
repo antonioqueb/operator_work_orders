@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <record id="view_workorder_tree_operator_inherit" model="ir.ui.view">
-            <field name="name">workorder.tree.operator.inherit</field>
-            <field name="model">mrp.workorder</field>
-            <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_view"/>
-            <field name="arch" type="xml">
-            </field>
-        </record>
-
+        <!-- Creación de una acción de ventana que abrirá la vista de árbol existente -->
         <record id="action_work_orders_operator" model="ir.actions.act_window">
             <field name="name">Órdenes de Trabajo</field>
             <field name="res_model">mrp.workorder</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="view_workorder_tree_operator_inherit"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="mrp.mrp_production_workorder_tree_view"/>
             <field name="context">{'search_default_ready_to_start': 1}</field>
             <field name="domain">[]</field>
             <field name="groups_id" eval="[(4, ref('operator_work_orders.group_machine_operator'))]"/>
         </record>
 
+        <!-- Creación del elemento de menú en la raíz que abrirá la acción anterior -->
         <menuitem id="menu_work_orders_operator_root"
                   name="Órdenes de Trabajo"
                   action="action_work_orders_operator"
