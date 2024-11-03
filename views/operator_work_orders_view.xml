@@ -1,11 +1,11 @@
 <odoo>
     <data>
-        <!-- Vista de órdenes de trabajo solo accesible para el grupo Machine Operator -->
+        <!-- Vista de órdenes de trabajo solo accesible para el grupo Operador de Máquina -->
         <record id="view_workorder_tree_operator" model="ir.ui.view">
             <field name="name">workorder.tree.operator</field>
             <field name="model">mrp.workorder</field>
             <field name="arch" type="xml">
-                <tree string="Work Orders">
+                <tree string="Órdenes de Trabajo">
                     <field name="name"/>
                     <field name="state"/>
                     <field name="workcenter_id"/>
@@ -16,7 +16,7 @@
 
         <!-- Acción de ventana para mostrar las órdenes de trabajo -->
         <record id="action_work_orders_operator" model="ir.actions.act_window">
-            <field name="name">Work Orders</field>
+            <field name="name">Órdenes de Trabajo</field>
             <field name="res_model">mrp.workorder</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_workorder_tree_operator"/>
@@ -24,10 +24,9 @@
             <field name="groups_id" eval="[(4, ref('operator_work_orders.group_machine_operator'))]"/>
         </record>
 
-        <!-- Menú para acceder a las órdenes de trabajo -->
-        <menuitem id="menu_work_orders_operator"
-                  name="Work Orders"
-                  parent="mrp.menu_mrp_root"
+        <!-- Menú para acceder a las órdenes de trabajo en el menú root -->
+        <menuitem id="menu_work_orders_operator_root"
+                  name="Órdenes de Trabajo"
                   action="action_work_orders_operator"
                   groups="operator_work_orders.group_machine_operator"/>
     </data>
