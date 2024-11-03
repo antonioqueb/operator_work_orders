@@ -5,7 +5,7 @@
             <field name="name">workorder.tree.operator</field>
             <field name="model">mrp.workorder</field>
             <field name="arch" type="xml">
-                <tree string="Órdenes de Trabajo" decoration-bf="is_user_working">
+                <tree string="Órdenes de Trabajo">
                     <field name="name"/>
                     <field name="state"/>
                     <field name="workcenter_id"/>
