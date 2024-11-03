@@ -16,7 +16,7 @@
             </field>
         </record>
 
-        <!-- Vista Kanban de órdenes de trabajo con botones de acción estilizados -->
+        <!-- Vista Kanban de órdenes de trabajo con botón de acción estilizado -->
         <record id="view_workorder_kanban_operator" model="ir.ui.view">
             <field name="name">workorder.kanban.operator</field>
             <field name="model">mrp.workorder</field>
@@ -42,7 +42,6 @@
                                     </div>
                                     <div class="d-flex justify-content-between">
                                         <button type="object" name="button_start" class="btn btn-primary btn-sm">Iniciar Producción</button>
-                                        <button type="object" name="button_pause" class="btn btn-danger btn-sm">Pausar/Detener Producción</button>
                                     </div>
                                     <div class="mt-2">
                                         <span class="text-muted">Tiempo:</span>
