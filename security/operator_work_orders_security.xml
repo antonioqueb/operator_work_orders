@@ -1,12 +1,12 @@
 <odoo>
     <data noupdate="1">
-        <!-- Crear un grupo para Operadores de Máquina -->
+        <!-- Grupo para Operadores de Máquina -->
         <record id="group_machine_operator" model="res.groups">
             <field name="name">Operador de Máquina</field>
             <field name="category_id" ref="base.module_category_manufacturing"/>
         </record>
 
-        <!-- Permisos específicos para las órdenes de trabajo -->
+        <!-- Regla de acceso para mrp.workorder -->
         <record id="mrp_work_order_access_operator" model="ir.rule">
             <field name="name">Acceso a Órdenes de Trabajo del Operador</field>
             <field name="model_id" ref="mrp.model_mrp_workorder"/>

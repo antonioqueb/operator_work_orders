@@ -1,22 +1,29 @@
 <odoo>
     <data>
-        <!-- Vista de árbol de órdenes de trabajo solo accesible para el grupo Operador de Máquina -->
+        <!-- Vista de árbol de órdenes de trabajo -->
         <record id="view_workorder_tree_operator" model="ir.ui.view">
             <field name="name">workorder.tree.operator</field>
             <field name="model">mrp.workorder</field>
             <field name="arch" type="xml">
-                <tree string="Órdenes de Trabajo" class="table table-striped table-bordered table-hover">
-                    <field name="name" string="Nombre" class="text-primary font-weight-bold"/>
-                    <field name="state" string="Estado" class="badge badge-info text-uppercase"/>
-                    <field name="workcenter_id" string="Centro de Trabajo" class="text-success font-italic"/>
-                    <field name="production_id" string="Producción" class="text-danger font-weight-bold"/>
-                    <field name="duration_expected" string="Duración Estimada (min)" class="font-weight-bold"/>
-                    <field name="duration" string="Duración" class="badge badge-warning font-italic"/>
+                <tree string="Órdenes de Trabajo" decoration-bf="is_user_working">
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="workcenter_id"/>
+                    <field name="production_id"/>
+                    <field name="duration_expected"/>
+                    <field name="duration" widget="mrp_timer" readonly="True"/>
+                    <!-- Botones de acción -->
+                    <button name="button_start" type="object" string="Iniciar" icon="fa-play"
+                            invisible="state != 'ready'"/>
+                    <button name="button_pending" type="object" string="Pausa" icon="fa-pause"
+                            invisible="state != 'progress'"/>
+                    <button name="action_block" type="object" string="Bloquear" icon="fa-lock"
+                            invisible="state != 'progress'"/>
                 </tree>
             </field>
         </record>
 
-        <!-- Vista Kanban de órdenes de trabajo con botón de acción estilizado -->
+        <!-- Vista Kanban de órdenes de trabajo -->
         <record id="view_workorder_kanban_operator" model="ir.ui.view">
             <field name="name">workorder.kanban.operator</field>
             <field name="model">mrp.workorder</field>
@@ -24,31 +31,30 @@
                 <kanban default_group_by="state">
                     <templates>
                         <t t-name="kanban-box">
-                            <div class="oe_kanban_global_click card border-light mb-3">
+                            <div class="oe_kanban_global_click card">
                                 <div class="card-header bg-primary text-white">
                                     <strong><field name="name"/></strong>
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text">
-                                        <span class="text-muted">Centro:</span> <strong class="text-success"><field name="workcenter_id"/></strong>
+                                    <p><strong>Centro:</strong> <field name="workcenter_id"/></p>
+                                    <p><strong>Producción:</strong> <field name="production_id"/></p>
+                                    <p>
+                                        <strong>Estado:</strong>
+                                        <field name="state"/>
                                     </p>
-                                    <p class="card-text">
-                                        <span class="text-muted">Producción:</span> <strong class="text-danger"><field name="production_id"/></strong>
+                                    <!-- Botones de acción -->
+                                    <div>
+                                        <button name="button_start" type="object" string="Iniciar" class="btn btn-primary btn-sm"
+                                                invisible="state != 'ready'"/>
+                                        <button name="button_pending" type="object" string="Pausa" class="btn btn-warning btn-sm"
+                                                invisible="state != 'progress'"/>
+                                        <button name="action_block" type="object" string="Bloquear" class="btn btn-danger btn-sm"
+                                                invisible="state != 'progress'"/>
+                                    </div>
+                                    <p>
+                                        <strong>Duración:</strong>
+                                        <field name="duration" widget="mrp_timer" readonly="True"/>
                                     </p>
-                                    <div class="mb-2">
-                                        <span class="badge badge-secondary text-uppercase">
-                                            <field name="state"/>
-                                        </span>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <button type="object" name="button_start" class="btn btn-primary btn-sm">Iniciar Producción</button>
-                                    </div>
-                                    <div class="mt-2">
-                                        <span class="text-muted">Tiempo:</span>
-                                        <span class="badge badge-warning">
-                                            <field name="duration" widget="float_time"/>
-                                        </span>
-                                    </div>
                                 </div>
                             </div>
                         </t>
@@ -57,17 +63,18 @@
             </field>
         </record>
 
-        <!-- Acción de ventana para mostrar las órdenes de trabajo -->
+        <!-- Acción de ventana -->
         <record id="action_work_orders_operator" model="ir.actions.act_window">
             <field name="name">Órdenes de Trabajo</field>
             <field name="res_model">mrp.workorder</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">tree,form,kanban</field>
             <field name="view_id" ref="view_workorder_tree_operator"/>
             <field name="context">{'search_default_ready_to_start': 1}</field>
+            <field name="domain">[]</field>
             <field name="groups_id" eval="[(4, ref('operator_work_orders.group_machine_operator'))]"/>
         </record>
 
-        <!-- Menú para acceder a las órdenes de trabajo en el menú root -->
+        <!-- Menú -->
         <menuitem id="menu_work_orders_operator_root"
                   name="Órdenes de Trabajo"
                   action="action_work_orders_operator"
