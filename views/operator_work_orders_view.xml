@@ -48,8 +48,6 @@
                                                 invisible="state != 'ready'"/>
                                         <button name="button_pending" type="object" string="Pausa" class="btn btn-warning btn-sm"
                                                 invisible="state != 'progress'"/>
-                                        <button name="action_block" type="object" string="Bloquear" class="btn btn-danger btn-sm"
-                                                invisible="state != 'progress'"/>
                                     </div>
                                     <p>
                                         <strong>Duración:</strong>
